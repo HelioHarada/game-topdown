@@ -20,7 +20,7 @@ public class PlayerAnim : MonoBehaviour
     2 - Run
     3 - Roll
     4 - Cut
-    5 - 
+    5 - dig
     6 - 
     7 - 
 
@@ -37,8 +37,8 @@ public class PlayerAnim : MonoBehaviour
     {   
         OnMoving();
         OnRunning();
-        OnRolling();
         OnCutting();
+        OnDigging();
     }
 
     #region 
@@ -77,15 +77,12 @@ public class PlayerAnim : MonoBehaviour
         }
     }
 
-    void OnRolling()
+    void OnDigging()
     {
-        // if(player.direction.sqrMagnitude != 0)
-        // {
-        //     if(player.isRolling)
-        //     {
-        //         anim.SetInteger("transition", 3);
-        //     }
-        // }
+        if(player.IsDigging)
+        {
+            anim.SetInteger("transition", 5);
+        }
     }
 
     void OnCutting()
