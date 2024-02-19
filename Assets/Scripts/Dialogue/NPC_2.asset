@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6610eb4195d53f498248ee0e4635eae, type: 3}
+  m_Name: NPC_2
+  m_EditorClassIdentifier: 
+  actor: {fileID: 8999049759058639285, guid: 34ee6ec443289ce46a62e2db8f5951d8, type: 3}
+  speakerSprite: {fileID: 21300000, guid: 8ecb6c1e29357734887d9faedc84f5af, type: 3}
+  sentence: 
+  dialogues:
+  - actorName: Kyller
+    profile: {fileID: 21300000, guid: 8ecb6c1e29357734887d9faedc84f5af, type: 3}
+    sentence:
+      portuguese: To de costa!
+      english: 
+  - actorName: Kyller
+    profile: {fileID: 0}
+    sentence:
+      portuguese: Cade meu Zizu?
+      english: 
+  - actorName: Kyller
+    profile: {fileID: 21300000, guid: 8ecb6c1e29357734887d9faedc84f5af, type: 3}
+    sentence:
+      portuguese: Cade o serguei??
+      english: 
+  - actorName: 
+    profile: {fileID: 21300000, guid: 8ecb6c1e29357734887d9faedc84f5af, type: 3}
+    sentence:
+      portuguese: Minha quarta fala
+      english: 
