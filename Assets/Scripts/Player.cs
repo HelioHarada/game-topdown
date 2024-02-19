@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+
 // using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,8 +22,10 @@ public class Player : MonoBehaviour
     private bool _isRolling;
     private bool _isCutting;
     private bool _isDigging;
+    private bool _isWatering;
 
     private Rigidbody2D rb;
+    private PlayerItems playerItems;
 
     [SerializeField]
     private Vector2 _direction;
@@ -54,12 +58,12 @@ public class Player : MonoBehaviour
     }
 
     public bool IsDigging { get => _isDigging; set => _isDigging = value; }
-
-
+    public bool IsWatering { get => _isWatering; set => _isWatering = value; }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerItems = GetComponent<PlayerItems>();
         initialSpeed = speed;
     }
 
@@ -69,7 +73,7 @@ public class Player : MonoBehaviour
         OnRoll();
         OnCut();
         OnDigging();
-
+        OnWatering();
         HandleTool();
       
     }
@@ -98,6 +102,12 @@ public class Player : MonoBehaviour
         {
             handlingObj = 2;
         }
+
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            handlingObj = 3;
+        }
+
     }
 
     #region Movement
@@ -125,7 +135,6 @@ public class Player : MonoBehaviour
         if(Input.GetMouseButtonDown(1))
         {
             
-            speed = 0;
             rb.MovePosition(rb.position + _direction * initialSpeed * rollSpeed * Time.fixedDeltaTime);
             isRolling = true;
              
@@ -173,6 +182,29 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnWatering()
+    {
+        if(handlingObj == 3)
+        {
+            if(Input.GetMouseButtonDown(0) && playerItems.TotalWater > 0.1f)
+            {
+                IsWatering = true;
+                speed = 0f;
+            }
+
+            if(Input.GetMouseButtonUp(0) || playerItems.TotalWater <= 0.1f)
+            {
+                IsWatering = false;
+                speed = initialSpeed;
+            }
+        }
+
+        if(IsWatering)
+        {
+            playerItems.TotalWater -= 0.01f;
+        }
+        
+    }
     #endregion
 
     

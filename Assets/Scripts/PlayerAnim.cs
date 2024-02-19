@@ -6,6 +6,8 @@ public class PlayerAnim : MonoBehaviour
 {
 
     private Player player;
+
+
     private Animator anim;
     // Start is called before the first frame update
 
@@ -21,7 +23,7 @@ public class PlayerAnim : MonoBehaviour
     3 - Roll
     4 - Cut
     5 - dig
-    6 - 
+    6 - watering
     7 - 
 
     */
@@ -29,6 +31,7 @@ public class PlayerAnim : MonoBehaviour
     void Start()
     {
         player = GetComponent<Player>();
+    
         anim = GetComponent<Animator>();
     }
 
@@ -39,6 +42,7 @@ public class PlayerAnim : MonoBehaviour
         OnRunning();
         OnCutting();
         OnDigging();
+        OnWatering();
     }
 
     #region 
@@ -93,6 +97,14 @@ public class PlayerAnim : MonoBehaviour
             anim.SetInteger("transition",4);
         }
     }
+   
+   void OnWatering()
+   {
+    if(player.IsWatering )
+    {
+        anim.SetInteger("transition",6);
+    }
+   }
     #endregion
 
 
