@@ -76,7 +76,7 @@ public class Tree : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D collider){
-        if(collider.CompareTag("HitCollider"))
+        if(collider.CompareTag("AxeCollider"))
         {
             OnHit();
            
