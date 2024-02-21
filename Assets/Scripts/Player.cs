@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 
     // Control tool
    [Header("handle tool")]
-     [SerializeField] private int handlingObj = 1;
+     [SerializeField] private int _handlingObj = 1;
     
     private bool _isRunning;
     private bool _isRolling;
@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
 
     public bool IsDigging { get => _isDigging; set => _isDigging = value; }
     public bool IsWatering { get => _isWatering; set => _isWatering = value; }
+    public int HandlingObj { get => _handlingObj; set => _handlingObj = value; }
 
     void Start()
     {
@@ -95,17 +96,17 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            handlingObj = 1;
+            _handlingObj = 1;
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            handlingObj = 2;
+            _handlingObj = 2;
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha3))
         {
-            handlingObj = 3;
+            _handlingObj = 3;
         }
 
     }
@@ -165,7 +166,7 @@ public class Player : MonoBehaviour
 
     void OnDigging()
     {
-        if(handlingObj == 2 && Input.GetMouseButtonDown(0))
+        if(_handlingObj == 2 && Input.GetMouseButtonDown(0))
         {
             IsDigging = true;
             speed = 0;
@@ -182,23 +183,29 @@ public class Player : MonoBehaviour
 
     void OnCut()
     {
-        if(handlingObj == 1 && Input.GetMouseButtonDown(0))
+        if(_handlingObj == 1)
         {
-            isCutting = true;
-            speed = 0;
-           
-        }
-        if(Input.GetMouseButtonUp(0))
-        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                isCutting = true;
+                speed = 0;
+            
+            }
+            if(Input.GetMouseButtonUp(0))
+            {
+                speed = initialSpeed;
+                isCutting = false;
+            }
+        }else{
             speed = initialSpeed;
             isCutting = false;
-           
         }
+
     }
 
     void OnWatering()
     {
-        if(handlingObj == 3)
+        if(_handlingObj == 3)
         {
             if(Input.GetMouseButtonDown(0) && playerItems.TotalWater > 0.1f)
             {
@@ -211,6 +218,9 @@ public class Player : MonoBehaviour
                 IsWatering = false;
                 speed = initialSpeed;
             }
+        }else{
+            IsWatering = false;
+            speed = initialSpeed;
         }
 
         if(IsWatering)

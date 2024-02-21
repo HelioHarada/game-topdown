@@ -61,7 +61,7 @@ public class wood : MonoBehaviour
     {
         if(collisor.CompareTag("Player"))
         {
-            collisor.GetComponent<PlayerItems>().totalWood++;
+            collisor.GetComponent<PlayerItems>().TotalWood++;
             if(gameObject.activeSelf)
             {
                 
