@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 
 // using Unity.VisualScripting;
 using UnityEngine;
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
             OnRun();
        }else{
             OnMove(); 
-       }    
+       }
     }
 
 
@@ -122,31 +122,45 @@ public class Player : MonoBehaviour
         isRunning = false;
         rb.MovePosition(rb.position + _direction * speed * Time.fixedDeltaTime);
 
+   
+
     }
 
     void OnRun()
     {   
         isRunning = true;
         rb.MovePosition(rb.position + _direction * speed * runSpeed * Time.fixedDeltaTime);
+     
     }
 
     void OnRoll()
     {
         if(Input.GetMouseButtonDown(1))
-        {
-            
-            rb.MovePosition(rb.position + _direction * initialSpeed * rollSpeed * Time.fixedDeltaTime);
+        { 
+            rb.velocity = _direction * rollSpeed;
+             
+            // rb.MovePosition(rb.position* rollSpeed + _direction * initialSpeed * rollSpeed );
             isRolling = true;
+            Invoke("DisableRoll", 0.01f);
              
         }
+
+
 
         if(Input.GetMouseButtonUp(1))
         {
             isRolling = false;
+            rb.velocity = Vector2.zero;
             speed = initialSpeed;
         }
 
 
+    }
+
+    void DisableRoll()
+    {
+            isRolling = false;
+            speed = initialSpeed;
     }
 
     void OnDigging()
