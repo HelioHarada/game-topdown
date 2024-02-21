@@ -20,7 +20,7 @@ public class planting : MonoBehaviour
 
   [Header("Settings")]
     [SerializeField]private int initialDigAmount;
-    [SerializeField] private bool detectingPlayer;
+    [SerializeField] private bool detectingWater;
     [SerializeField] private float WaterAmount; 
     [SerializeField] private float currentWater; 
     private bool isHole;
@@ -38,7 +38,7 @@ public class planting : MonoBehaviour
     {
         if(isHole)
         {
-            if(detectingPlayer)
+            if(detectingWater)
             {
                 currentWater += 0.01f;
             }
@@ -70,7 +70,6 @@ public class planting : MonoBehaviour
 
             if(digAmount <= initialDigAmount)
             {
-               
                 spriteRender.sprite = hole;
                 isHole = true;
             }
@@ -88,7 +87,7 @@ public class planting : MonoBehaviour
 
         if(collider.CompareTag("WaterCollider"))
         {
-            detectingPlayer = true;
+            detectingWater = true;
         }
 
     }
@@ -99,7 +98,7 @@ public class planting : MonoBehaviour
 
         if(collider.CompareTag("WaterCollider"))
         {
-            detectingPlayer = false;
+            detectingWater = false;
         }
 
     }

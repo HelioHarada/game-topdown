@@ -33,6 +33,7 @@ public class Water : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             detectingPlayer = true;
+            Debug.Log("acesso");
         }
 
     }
