@@ -9,10 +9,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Speed control")]
-    public float speed;
-    public float initialSpeed;
-    public float runSpeed = 1.5f;
-    public float rollSpeed = 5.5f;
+    [SerializeField] private float speed;
+    [SerializeField] private float initialSpeed;
+    [SerializeField] private float runSpeed = 1.5f;
+    [SerializeField] private float rollSpeed = 5.5f;
+    [SerializeField] private float dashForce = 800f;
 
     // Control tool
    [Header("handle tool")]
@@ -76,7 +77,7 @@ public class Player : MonoBehaviour
         OnDigging();
         OnWatering();
         HandleTool();
-      
+ 
     }
 
 
@@ -138,11 +139,11 @@ public class Player : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(1))
         { 
-            rb.velocity = _direction * rollSpeed;
-             
-            // rb.MovePosition(rb.position* rollSpeed + _direction * initialSpeed * rollSpeed );
+            // rb.velocity = _direction * dashForce;
             isRolling = true;
+            
             Invoke("DisableRoll", 0.01f);
+            rb.AddForce(_direction * dashForce);
              
         }
 
@@ -151,17 +152,14 @@ public class Player : MonoBehaviour
         if(Input.GetMouseButtonUp(1))
         {
             isRolling = false;
-            rb.velocity = Vector2.zero;
-            speed = initialSpeed;
         }
 
 
     }
 
     void DisableRoll()
-    {
-            isRolling = false;
-            speed = initialSpeed;
+    {    
+        isRolling = false;  
     }
 
     void OnDigging()
@@ -169,11 +167,12 @@ public class Player : MonoBehaviour
         if(_handlingObj == 2 && Input.GetMouseButtonDown(0))
         {
             IsDigging = true;
-            speed = 0;
+            speed = 0f;
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if(_handlingObj == 2 && Input.GetMouseButtonUp(0))
         {
+          
             speed = initialSpeed;
             IsDigging = false;
             
@@ -188,17 +187,16 @@ public class Player : MonoBehaviour
             if(Input.GetMouseButtonDown(0))
             {
                 isCutting = true;
-                speed = 0;
+                speed = 0f;
             
             }
             if(Input.GetMouseButtonUp(0))
             {
+                 
                 speed = initialSpeed;
                 isCutting = false;
+                Debug.Log("cut: "+speed);
             }
-        }else{
-            speed = initialSpeed;
-            isCutting = false;
         }
 
     }
@@ -218,9 +216,6 @@ public class Player : MonoBehaviour
                 IsWatering = false;
                 speed = initialSpeed;
             }
-        }else{
-            IsWatering = false;
-            speed = initialSpeed;
         }
 
         if(IsWatering)

@@ -56,15 +56,6 @@ public class HUDControll : MonoBehaviour
         carrotUICount.text = playerItem.TotalCarrots.ToString();
 
         
-
-        /*
-        i // toolUI 
-        0 - x
-        1 - 
-        2 - 
-        3- 
-        */
-        
         if(toolUI.Count >= player.HandlingObj)
         {
             

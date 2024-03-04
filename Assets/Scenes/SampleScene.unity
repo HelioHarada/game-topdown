@@ -63418,6 +63418,7 @@ MonoBehaviour:
   initialSpeed: 0
   runSpeed: 1.5
   rollSpeed: 10
+  dashForce: 900
   _handlingObj: 1
   _direction: {x: 0, y: 0}
 --- !u!61 &1523731252
